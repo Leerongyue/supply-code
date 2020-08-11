@@ -24,6 +24,10 @@ export default new Vuex.Store({
       const res = await request(payload.url, payload.method, payload.value);
       // commit('saveItem', {item: payload.item});
       return res;
+    },
+    async getDetail({commit}, payload) {
+      const res = await request(payload.url, payload.method, payload.value);
+      return res;
     }
   },
   modules: {}

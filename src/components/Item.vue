@@ -13,12 +13,14 @@
       </li>
     </ul>
     <ul class="itemList">
-      <li
-        v-for="item in goodsList"
-        :key="item.barcode"
-      >
-        {{[parseInt(item.barcode)]}}{{item.goodsname}}
-      </li>
+      <routerLink to="/detail">
+        <li
+          v-for="item in goodsList"
+          :key="item.barcode"
+        >
+          {{[parseInt(item.barcode)]}} {{item.goodsname}}
+        </li>
+      </routerLink>
     </ul>
   </div>
 </template>
@@ -41,7 +43,7 @@
       'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     type = '全部';
     goodsList = [];
-    
+
     select(value: string) {
       this.type = value;
     }
@@ -96,15 +98,20 @@
       }
     }
 
+
     .itemList {
       margin: 0 8px;
 
-      li {
-        padding: 8px 0;
-        border-bottom: 0.9px solid #d4d4d4;
+      > a {
+        color: inherit;
 
-        &:nth-child(1) {
-          border-top: 0.9px solid #d4d4d4;
+        li {
+          padding: 8px 0;
+          border-bottom: 0.9px solid #d4d4d4;
+
+          &:nth-child(1) {
+            border-top: 0.9px solid #d4d4d4;
+          }
         }
       }
     }
