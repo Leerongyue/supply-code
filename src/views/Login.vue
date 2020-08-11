@@ -1,8 +1,8 @@
 <template>
   <div class="login">
-    <div class="bind"><strong>会员登录</strong></div>
-    <Input name="工号" placeholder="请输入工号" v-model="userno"/>
-    <Input name="密码" placeholder="请输入密码" v-model="password"/>
+    <div class="bind"><strong>员工登录</strong></div>
+    <Input type="text" name="工号" placeholder="请输入工号" v-model="userno"/>
+    <Input type="password" name="密码" placeholder="请输入密码" v-model="password"/>
     <Button name="立即登录" @click.native="onLogin">立即登录</Button>
   </div>
 </template>
@@ -13,6 +13,7 @@
   import Input from '@/components/Input.vue';
   import Button from '@/components/Button.vue';
   import {Md5} from 'md5-typescript';
+  import {message} from 'ant-design-vue';
 
   @Component({
     components: {Button, Input}
@@ -26,13 +27,20 @@
         userno: this.userno,
         pwd: Md5.init(this.password)
       };
-      alert(value.pwd);
-      this.$store.dispatch(
-        'login',
-        {url: '/login', method: 'POST', value: JSON.stringify(value)})
-        .then(res => {
-          console.log(res);
-        });
+      if (this.userno === '') {
+        message.info('请输入工号', 0.5);
+      } else if (this.password === '') {
+        message.info('请输入密码', 0.5);
+      } else {
+        this.$store.dispatch(
+          'login',
+          {url: '/login', method: 'POST', value: JSON.stringify(value)})
+          .then(res => {
+            console.log(res);
+          });
+        this.$router.push('/item');
+      }
+
     }
   }
 </script>

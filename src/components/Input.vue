@@ -3,7 +3,7 @@
     <span>{{name}}</span>
     <input
       :placeholder="placeholder"
-      type="text"
+      :type="type"
       :value="value"
       @input="$emit('input',$event.target.value)"
     >
@@ -19,6 +19,7 @@
     @Prop(String) name!: string;
     @Prop(String) placeholder!: string;
     @Prop(String) value!: string;
+    @Prop(String) type!: string;
   }
 </script>
 <style lang="scss" scoped>
