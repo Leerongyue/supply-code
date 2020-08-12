@@ -22,6 +22,12 @@
     password = '';
     userno = '';
 
+    created() {
+      this.$store.commit('getUser');
+      this.userno = this.$store.state.user.userno;
+      this.password = this.$store.state.user.password;
+    }
+
     onLogin() {
       const value = {
         userno: this.userno,
@@ -41,6 +47,9 @@
               message.info('工号不存在，或密码错误！', 0.5);
               return;
             } else {
+              this.$store.commit(
+                'saveUser',
+                {user: {userno: this.userno, password: this.password}});
               this.$router.push('/item');
             }
           });

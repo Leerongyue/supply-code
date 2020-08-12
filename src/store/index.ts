@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {request} from '@/helper/request';
+import setItem from '@/helper/setItem';
+import getItem from '@/helper/getItem';
 
 Vue.use(Vuex);
 
@@ -11,7 +13,11 @@ export default new Vuex.Store({
   },
   mutations: {
     saveUser(state, payload) {
-      console.log(1);
+      state.user = payload.user;
+      setItem('user', JSON.stringify(payload.user));
+    },
+    getUser(state) {
+      state.user = getItem('user');
     },
     saveItem(state, payload) {
       console.log(1);
