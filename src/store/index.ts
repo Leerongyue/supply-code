@@ -6,28 +6,32 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: null
+    user: null,
+    barcode: ''
   },
   mutations: {
-    // saveUser(state, payload) {
-    //   // setItem('user', JSON.stringify(payload.user));
-    // },
-    // saveItem() {}
+    saveUser(state, payload) {
+      console.log(1);
+    },
+    saveItem(state, payload) {
+      console.log(1);
+    },
+    transferBarcode(state, payload) {
+      state.barcode = payload.barcode;
+    }
   },
   actions: {
     async login({commit}, payload) {
-      const res = await request(payload.url, payload.method, payload.value);
-      // commit('saveUser', {user: payload.user});
-      return res;
+      return await request(payload.url, payload.method, payload.value);
+      commit('saveUser', {user: payload.user});
     },
     async getItem({commit}, payload) {
-      const res = await request(payload.url, payload.method, payload.value);
-      // commit('saveItem', {item: payload.item});
-      return res;
+      return await request(payload.url, payload.method, payload.value);
+      commit('saveItem', {item: payload.item});
     },
     async getDetail({commit}, payload) {
-      const res = await request(payload.url, payload.method, payload.value);
-      return res;
+      return await request(payload.url, payload.method, payload.value);
+      commit('saveUser', {user: payload.user});
     }
   },
   modules: {}
