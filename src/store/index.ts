@@ -22,8 +22,9 @@ export default new Vuex.Store({
   },
   actions: {
     async login({commit}, payload) {
-      return await request(payload.url, payload.method, payload.value);
+      const res = await request(payload.url, payload.method, payload.value);
       commit('saveUser', {user: payload.user});
+      return res;
     },
     async getItem({commit}, payload) {
       return await request(payload.url, payload.method, payload.value);

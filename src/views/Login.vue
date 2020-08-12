@@ -37,8 +37,14 @@
           {url: '/login', method: 'POST', value: JSON.stringify(value)})
           .then(res => {
             console.log(res);
+            if (res.data.err_code === '100') {
+              message.info('工号不存在，或密码错误！', 0.5);
+              return;
+            } else {
+              this.$router.push('/item');
+            }
           });
-        this.$router.push('/item');
+
       }
 
     }

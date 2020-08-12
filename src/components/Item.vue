@@ -47,7 +47,6 @@
     </ul>
   </div>
 </template>
-
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
@@ -101,7 +100,7 @@
           method: 'POST',
           value: JSON.stringify({creater: 'admin'})
         }).then(res => {
-        console.log(res);
+        // console.log(res);
         this.goodsList = res.data.resultObj.map((item: ItemName) => item.carddata);
       });
     }
