@@ -36,7 +36,7 @@
       <routerLink to="/detail" v-for="item in goodsList" :key="item.barcode">
         <li
           v-if="trimNumber(item.py).substring(0,1)===type.toLowerCase() || type==='#' ||item.barcode===input ||item.py===input"
-          @click="setBarcode(item.barcode,item.asknum)"
+          @click="setBarcode(item.barcode,item.asknum,item.goodsname)"
         >
           {{[parseInt(item.barcode)]}}[{{item.py}}] {{item.goodsname}}*{{item.asknum}}
         </li>
@@ -87,9 +87,10 @@
       this.$router.push('/');
     }
 
-    setBarcode(barcode: string, number: string) {
+    setBarcode(barcode: string, number: string, goodsname: string) {
       this.$store.commit('transferBarcode', {barcode});
       this.$store.commit('transferNumber', {number});
+      this.$store.commit('transferGoodsName', {goodsname});
     }
 
     created() {

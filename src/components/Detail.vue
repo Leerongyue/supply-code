@@ -1,18 +1,18 @@
 <template>
   <div class="detail">
-    <header>
-      <a-icon type="left" class="left" @click="onBack"/>
-      <span><strong>{{goodsList.length>0? goodsList[0].goodsname:'加载中'}}</strong></span>
-      <a-icon type="right" class="right"/>
-    </header>
+    <Head text="商品补货量" left="1" path="/item"/>
     <main>
-      <!--      <div class="collect">-->
-      <!--        <span>门店数量:{{goodsList.length}}家</span>-->
-      <!--        <span>规格</span>-->
-      <!--      </div>-->
+      <div class="property">
+        <span>商品规格</span>
+        <span>补货总量</span>
+      </div>
+      <div class="fuck">
+        <span>{{$store.state.goodsname}}</span>
+        <span>{{$store.state.number}}</span>
+      </div>
       <div class="head">
-        <div class="shop">门店(共{{goodsList.length}}家)</div>
-        <div class="number">补货量(共{{$store.state.number}})</div>
+        <div class="shop">门店</div>
+        <div class="number">补货量</div>
       </div>
       <div class="content">
         <ul v-for="item in goodsList" :key="item.shopname"
@@ -29,12 +29,14 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
+  import Head from '@/components/Head.vue';
 
   type ItemName = {
     carddata: { barcode: string; goodsname: string };
   }
-
-  @Component
+  @Component({
+    components: {Head}
+  })
   export default class Detail extends Vue {
     number = 0;
     goodsList = [];
@@ -86,6 +88,26 @@
     }
 
     main {
+      .property {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #d4d4d4;
+
+        span {
+          padding: 6px 16px;
+        }
+      }
+
+      .fuck {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #d4d4d4;
+
+        span {
+          padding: 6px 16px;
+        }
+      }
+
       .head {
         display: flex;
         justify-content: space-between;

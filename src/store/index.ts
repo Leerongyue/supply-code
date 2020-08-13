@@ -10,7 +10,8 @@ export default new Vuex.Store({
   state: {
     user: null,
     barcode: '',
-    number: ''
+    number: '',
+    goodsname: ''
   },
   mutations: {
     saveUser(state, payload) {
@@ -28,7 +29,10 @@ export default new Vuex.Store({
     },
     transferNumber(state, payload) {
       state.number = payload.number;
-    }
+    },
+    transferGoodsName(state, payload) {
+      state.goodsname = payload.goodsname;
+    },
   },
   actions: {
     async login({commit}, payload) {
