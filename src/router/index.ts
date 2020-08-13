@@ -4,6 +4,8 @@ import Login from '@/views/Login.vue';
 import Item from '@/components/Item.vue';
 import Detail from '@/components/Detail.vue';
 import NotFound from '@/components/NotFound.vue';
+import Nav from '@/components/Nav.vue';
+import ChangePassword from '@/components/ChangePassword.vue';
 
 Vue.use(VueRouter);
 
@@ -23,6 +25,14 @@ const routes: Array<RouteConfig> = [
   {
     path: '/detail',
     component: Detail
+  },
+  {
+    path: '/nav',
+    component: Nav
+  },
+  {
+    path: '/changePassword',
+    component: ChangePassword
   },
   {
     path: '*',

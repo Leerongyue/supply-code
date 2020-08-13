@@ -99,7 +99,7 @@
         {
           url: '/goods/shophz/',
           method: 'POST',
-          value: JSON.stringify({creater: 'admin'})
+          value: JSON.stringify({creater: this.$store.state.user.userno})
         }).then(res => {
         // console.log(res);
         this.goodsList = res.data.resultObj.map((item: ItemName) => item.carddata);
@@ -121,7 +121,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgb(254, 137, 67);
+      background: rgb(0, 192, 239);
       padding: 16px 8px 16px 8px;
       margin-bottom: 16px;
 
@@ -131,8 +131,8 @@
     }
 
     input {
-      border-radius: 12px;
-      padding-left: 8px;
+      border-radius: 16px;
+      padding: 4px 8px;
       margin: 0 8px;
 
     }
@@ -148,10 +148,6 @@
 
       li {
         padding: 0 4px;
-
-        &:nth-child(1) {
-          padding: 0 6px;
-        }
 
         &:nth-child(10) {
           padding: 0 6px;

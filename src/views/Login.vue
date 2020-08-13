@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <div class="head"><strong>三鑫订货补货系统</strong></div>
+    <Head text="三鑫补货系统" left='0'/>
     <div class="bind"><strong>员工登录</strong></div>
     <Input type="text" name="工号" placeholder="请输入工号" v-model="userno"/>
     <Input type="password" name="密码" placeholder="请输入密码" v-model="password"/>
@@ -15,9 +15,10 @@
   import Button from '@/components/Button.vue';
   import {Md5} from 'md5-typescript';
   import {message} from 'ant-design-vue';
+  import Head from '@/components/Head.vue';
 
   @Component({
-    components: {Button, Input}
+    components: {Head, Button, Input}
   })
   export default class Login extends Vue {
     password = '';
@@ -52,7 +53,7 @@
               this.$store.commit(
                 'saveUser',
                 {user: {userno: this.userno, password: this.password}});
-              this.$router.push('/item');
+              this.$router.push('/nav');
             }
           });
       }
@@ -64,15 +65,6 @@
   .login {
     height: 100vh;
     background: white;
-
-    .head {
-      background: rgb(254, 137, 67);
-      color: white;
-      text-align: center;
-      padding: 16px 0;
-      font-size: 20px;
-      margin-bottom: 16px;
-    }
 
     .bind {
       text-align: center;

@@ -19,7 +19,7 @@
     margin: 0 16px;
 
     > button {
-      background: rgb(254, 137, 67);
+      background: rgb(0, 192, 239);
       width: 100%;
       margin-top: 24px;
       padding: 10px 0;
