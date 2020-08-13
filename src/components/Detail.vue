@@ -1,18 +1,20 @@
 <template>
   <div class="detail">
-    <Head text="商品补货量" left="1" path="/item"/>
+    <Head text="商品补货详情" left="1" path="/item"/>
     <main>
-      <div class="property">
-        <span>商品规格</span>
-        <span>补货总量</span>
-      </div>
-      <div class="fuck">
-        <span>{{$store.state.goodsname}}</span>
-        <span>{{$store.state.number}}</span>
-      </div>
-      <div class="head">
-        <div class="shop">门店</div>
-        <div class="number">补货量</div>
+      <div class="total">
+        <div class="kind">
+          <span>商品规格</span>
+          <span> {{$store.state.goodsname}}</span>
+        </div>
+        <div class="kindName">
+          <span>品名</span>
+          <span>{{}}</span>
+        </div>
+        <div class="goodNumber">
+          <span>补货总量</span>
+          <span> {{$store.state.number}}</span>
+        </div>
       </div>
       <div class="content">
         <ul v-for="item in goodsList" :key="item.shopname"
@@ -41,7 +43,7 @@
     number = 0;
     goodsList = [];
 
-    created() {
+    beforeCreate() {
       const value = {
         creater: 'admin',
         barcode: this.$store.state.barcode
@@ -73,46 +75,18 @@
 
 <style lang="scss" scoped>
   .detail {
-    background: white;
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 8px 16px 8px;
-      background: #d4d4d4;
-
-      .right {
-        visibility: hidden;
-      }
-    }
+    /*background: white;*/
 
     main {
-      .property {
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 1px solid #d4d4d4;
+      .total {
+        background: white;
 
-        span {
+        div {
+          display: flex;
+          justify-content: space-between;
           padding: 6px 16px;
+          border-bottom: 1px solid #d4d4d4;
         }
-      }
-
-      .fuck {
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 1px solid #d4d4d4;
-
-        span {
-          padding: 6px 16px;
-        }
-      }
-
-      .head {
-        display: flex;
-        justify-content: space-between;
-        padding: 16px;
-        border-bottom: 1px solid #d4d4d4;
       }
 
       .content {
@@ -122,17 +96,12 @@
           display: flex;
           justify-content: space-between;
           border-bottom: 1px solid #d4d4d4;
+          background: white;
 
           li {
             padding: 6px 16px;
           }
         }
-      }
-
-      .collect {
-        display: flex;
-        justify-content: space-between;
-        margin: 8px 16px;
       }
     }
   }

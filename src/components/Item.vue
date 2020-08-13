@@ -1,8 +1,7 @@
 <template>
   <div class="item">
-    {{input}}
     <Head text="商品列表" left="1" path="/nav"/>
-    <input type="text" placeholder="请输入商品条码或拼音助记码" v-model="input">
+    <input type="text" placeholder="请输入商品条码或拼音助记码" v-model="input" @input="onInput">
     <ul class="filter">
       <li :class="type==='#' && 'selected'" @click="select($event.target.innerHTML)">#</li>
       <li :class="type==='A' && 'selected'" @click="select($event.target.innerHTML)">A</li>
@@ -32,16 +31,20 @@
       <li :class="type==='Y' && 'selected'" @click="select($event.target.innerHTML)">Y</li>
       <li :class="type==='Z' && 'selected'" @click="select($event.target.innerHTML)">Z</li>
     </ul>
-    <ul class="itemList">
-      <routerLink to="/detail" v-for="item in goodsList" :key="item.barcode">
-        <li
-          v-if="trimNumber(item.py).substring(0,1)===type.toLowerCase() || type==='#' ||item.barcode===input ||item.py===input"
-          @click="setBarcode(item.barcode,item.asknum,item.goodsname)"
-        >
-          {{[parseInt(item.barcode)]}}[{{item.py}}] {{item.goodsname}}*{{item.asknum}}
-        </li>
-      </routerLink>
-    </ul>
+    <routerLink to="/detail" v-for="item in goodsList" :key="item.barcode">
+      <div
+        v-if="trimNumber(item.py).substring(0,1)===type.toLowerCase()
+          || type==='#'
+          ||item.barcode.indexOf(input)>=0
+          ||item.py.indexOf(input)>=0"
+        @click="setBarcode(item.barcode,item.asknum,item.goodsname)"
+      >
+        {{trimNumber(item.goodsname)}},补货总量 : {{item.asknum}}
+      </div>
+      <div>
+        {{[parseInt(item.barcode)]}}[{{trimNumber(item.py)}}]
+      </div>
+    </routerLink>
   </div>
 </template>
 <script lang="ts">
@@ -64,6 +67,14 @@
     type = '#';
     goodsList = [];
     input = '';
+
+    onInput() {
+      if (this.input === '') {
+        this.type = '#';
+      } else {
+        this.type = '';
+      }
+    }
 
     select(value: string) {
       this.type = value;
@@ -91,6 +102,7 @@
       this.$store.commit('transferBarcode', {barcode});
       this.$store.commit('transferNumber', {number});
       this.$store.commit('transferGoodsName', {goodsname});
+      // this.$store.commit('transferShopNumber', {number});
     }
 
     created() {
@@ -101,7 +113,7 @@
           method: 'POST',
           value: JSON.stringify({creater: this.$store.state.user.userno})
         }).then(res => {
-        // console.log(res);
+        console.log(res);
         this.goodsList = res.data.resultObj.map((item: ItemName) => item.carddata);
       });
     }
@@ -120,6 +132,7 @@
       border-radius: 16px;
       padding: 4px 8px;
       margin: 0 8px;
+      background: white;
     }
 
     .filter {
@@ -145,20 +158,14 @@
       }
     }
 
-    .itemList {
-      margin: 20px 20px 0 8px;
+    a {
+      border-bottom: 1px solid #d4d4d4;
+      color: inherit;
+      padding: 8px 20px 8px 16px;
+      margin-top: 8px;
+      margin-right: 24px;
 
-      > a {
-        color: inherit;
-
-        li {
-          padding: 8px 0;
-          border-bottom: 0.9px solid #d4d4d4;
-
-          &:nth-child(1) {
-            border-top: 0.9px solid #d4d4d4;
-          }
-        }
+      div {
       }
     }
   }

@@ -11,7 +11,8 @@ export default new Vuex.Store({
     user: null,
     barcode: '',
     number: '',
-    goodsname: ''
+    goodsname: '',
+    shopnumber: 0
   },
   mutations: {
     saveUser(state, payload) {
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     transferGoodsName(state, payload) {
       state.goodsname = payload.goodsname;
+    },
+    transferShopNumber(state, payload) {
+      state.shopnumber = payload.shopnumber;
     },
   },
   actions: {
