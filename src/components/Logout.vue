@@ -1,6 +1,6 @@
 <template>
   <div class="logout">
-    <Block text="退出登录"/>
+
   </div>
 </template>
 

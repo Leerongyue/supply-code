@@ -6,6 +6,7 @@ import Detail from '@/components/Detail.vue';
 import NotFound from '@/components/NotFound.vue';
 import Nav from '@/components/Nav.vue';
 import ChangePassword from '@/components/ChangePassword.vue';
+import Logout from '@/components/Logout.vue';
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,10 @@ const routes: Array<RouteConfig> = [
   {
     path: '/changePassword',
     component: ChangePassword
+  },
+  {
+    path: '/logout',
+    component: Logout
   },
   {
     path: '*',

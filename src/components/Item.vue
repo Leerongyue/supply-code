@@ -1,11 +1,8 @@
 <template>
   <div class="item">
-    <header>
-      <a-icon type="left" class="left" @click="onBack"/>
-      <strong>三鑫补货系统</strong>
-      <a-icon type="right" class="right"/>
-    </header>
-    <input type="text" placeholder="请输入商品条码或拼音助记码">
+    {{input}}
+    <Head text="商品列表" left="1" path="/nav"/>
+    <input type="text" placeholder="请输入商品条码或拼音助记码" v-model="input">
     <ul class="filter">
       <li :class="type==='#' && 'selected'" @click="select($event.target.innerHTML)">#</li>
       <li :class="type==='A' && 'selected'" @click="select($event.target.innerHTML)">A</li>
@@ -38,7 +35,7 @@
     <ul class="itemList">
       <routerLink to="/detail" v-for="item in goodsList" :key="item.barcode">
         <li
-          v-if="trimNumber(item.py).substring(0,1)===type.toLowerCase() || type==='#'"
+          v-if="trimNumber(item.py).substring(0,1)===type.toLowerCase() || type==='#' ||item.barcode===input ||item.py===input"
           @click="setBarcode(item.barcode,item.asknum)"
         >
           {{[parseInt(item.barcode)]}}[{{item.py}}] {{item.goodsname}}*{{item.asknum}}
@@ -51,13 +48,14 @@
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import Input from '@/components/Input.vue';
+  import Head from '@/components/Head.vue';
 
   type ItemName = {
     carddata: { barcode: string; goodsname: string };
   }
 
   @Component({
-    components: {Input}
+    components: {Head, Input}
   })
   export default class Item extends Vue {
     data = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
@@ -65,6 +63,7 @@
       'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     type = '#';
     goodsList = [];
+    input = '';
 
     select(value: string) {
       this.type = value;
@@ -116,25 +115,10 @@
     flex-direction: column;
     position: relative;
 
-    header {
-      text-align: center;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgb(0, 192, 239);
-      padding: 16px 8px 16px 8px;
-      margin-bottom: 16px;
-
-      .right {
-        visibility: hidden;
-      }
-    }
-
     input {
       border-radius: 16px;
       padding: 4px 8px;
       margin: 0 8px;
-
     }
 
     .filter {
@@ -159,7 +143,6 @@
         }
       }
     }
-
 
     .itemList {
       margin: 20px 20px 0 8px;

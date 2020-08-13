@@ -4,12 +4,11 @@
     <router-link to="/item">
       <div class="check">补货查询</div>
     </router-link>
-    <router-link to="/changePassword">
-      <div class="change">修改密码</div>
-    </router-link>
-    <router-link to="/item">
-      <div class="logout">退出登录</div>
-    </router-link>
+    <!--    <router-link to="/changePassword">-->
+    <div class="change">修改密码</div>
+    <!--    </router-link>-->
+    <div class="logout" @click="logout">退出登录</div>
+    <div class="copyright">三鑫科技 @2020 copyright All rights reserved</div>
   </div>
 </template>
 
@@ -22,11 +21,18 @@
     components: {Head}
   })
   export default class Nav extends Vue {
+    logout() {
+      this.$store.commit('saveUser', {user: null});
+      this.$router.push('/login');
+    }
   }
+
 </script>
 
 <style lang="scss" scoped>
   .nav {
+    background: white;
+
     .check {
       background: rgb(0, 192, 239);
     }
@@ -41,10 +47,16 @@
 
     .check, .logout, .change {
       text-align: center;
-      width: 100vw;
+      width: 90vw;
       padding: 68px 0;
       color: white;
       font-size: 24px;
+      margin: 16px auto;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 64px;
     }
   }
 </style>
