@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <div class="head"><strong>三鑫订货补货系统</strong></div>
     <div class="bind"><strong>员工登录</strong></div>
     <Input type="text" name="工号" placeholder="请输入工号" v-model="userno"/>
     <Input type="password" name="密码" placeholder="请输入密码" v-model="password"/>
@@ -24,8 +25,9 @@
 
     created() {
       this.$store.commit('getUser');
-      this.userno = this.$store.state.user.userno;
-      this.password = this.$store.state.user.password;
+      const user = this.$store.state.user;
+      this.userno = user ? user.userno : '';
+      this.password = user ? user.password : '';
     }
 
     onLogin() {
@@ -53,9 +55,7 @@
               this.$router.push('/item');
             }
           });
-
       }
-
     }
   }
 </script>
@@ -64,6 +64,15 @@
   .login {
     height: 100vh;
     background: white;
+
+    .head {
+      background: rgb(254, 137, 67);
+      color: white;
+      text-align: center;
+      padding: 16px 0;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
 
     .bind {
       text-align: center;

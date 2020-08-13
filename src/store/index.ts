@@ -9,7 +9,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: null,
-    barcode: ''
+    barcode: '',
+    number: ''
   },
   mutations: {
     saveUser(state, payload) {
@@ -24,6 +25,9 @@ export default new Vuex.Store({
     },
     transferBarcode(state, payload) {
       state.barcode = payload.barcode;
+    },
+    transferNumber(state, payload) {
+      state.number = payload.number;
     }
   },
   actions: {

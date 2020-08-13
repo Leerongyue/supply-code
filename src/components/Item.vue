@@ -2,12 +2,12 @@
   <div class="item">
     <header>
       <a-icon type="left" class="left" @click="onBack"/>
-      <strong>进货报账系统</strong>
+      <strong>三鑫补货系统</strong>
       <a-icon type="right" class="right"/>
     </header>
     <input type="text" placeholder="请输入商品条码或拼音助记码">
     <ul class="filter">
-      <li :class="type==='全部' && 'selected'" @click="select($event.target.innerHTML)">全部</li>
+      <li :class="type==='#' && 'selected'" @click="select($event.target.innerHTML)">#</li>
       <li :class="type==='A' && 'selected'" @click="select($event.target.innerHTML)">A</li>
       <li :class="type==='B' && 'selected'" @click="select($event.target.innerHTML)">B</li>
       <li :class="type==='C' && 'selected'" @click="select($event.target.innerHTML)">C</li>
@@ -38,8 +38,8 @@
     <ul class="itemList">
       <routerLink to="/detail" v-for="item in goodsList" :key="item.barcode">
         <li
-          v-if="trimNumber(item.py).substring(0,1)===type.toLowerCase() || type==='全部'"
-          @click="setBarcode(item.barcode)"
+          v-if="trimNumber(item.py).substring(0,1)===type.toLowerCase() || type==='#'"
+          @click="setBarcode(item.barcode,item.asknum)"
         >
           {{[parseInt(item.barcode)]}}[{{item.py}}] {{item.goodsname}}*{{item.asknum}}
         </li>
@@ -60,10 +60,10 @@
     components: {Input}
   })
   export default class Item extends Vue {
-    data = ['全部', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+    data = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
       'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    type = '全部';
+    type = '#';
     goodsList = [];
 
     select(value: string) {
@@ -88,11 +88,12 @@
       this.$router.push('/');
     }
 
-    setBarcode(barcode: string) {
+    setBarcode(barcode: string, number: string) {
       this.$store.commit('transferBarcode', {barcode});
+      this.$store.commit('transferNumber', {number});
     }
 
-    beforeCreate() {
+    created() {
       this.$store.dispatch(
         'getItem',
         {
@@ -113,13 +114,14 @@
     background: white;
     display: flex;
     flex-direction: column;
+    position: relative;
 
     header {
       text-align: center;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #d4d4d4;
+      background: rgb(254, 137, 67);
       padding: 16px 8px 16px 8px;
       margin-bottom: 16px;
 
@@ -137,12 +139,23 @@
 
     .filter {
       display: flex;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      align-items: flex-end;
-      padding-top: 8px;
+      position: absolute;
+      right: 4px;
+      top: 17%;
 
       li {
-        margin: 8px 1.5px;
+        padding: 0 4px;
+
+        &:nth-child(1) {
+          padding: 0 6px;
+        }
+
+        &:nth-child(10) {
+          padding: 0 6px;
+        }
 
         &.selected {
           color: white;
@@ -153,7 +166,7 @@
 
 
     .itemList {
-      margin: 0 8px;
+      margin: 20px 20px 0 8px;
 
       > a {
         color: inherit;
