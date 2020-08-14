@@ -82,16 +82,6 @@
 
     select(value: string) {
       this.type = value;
-      // <!--    <ul class="filter">-->
-      // <!--      <li-->
-      // <!--        v-for="item in data"-->
-      // <!--        :key="item"-->
-      // <!--        :class="type===item && 'selected'"-->
-      // <!--        @click="select($event.target.innerHTML)"-->
-      // <!--      >-->
-      // <!--        {{item}}-->
-      // <!--</li>-->
-      // < !--</ul>-->;;;
     }
 
     trimNumber(str: string) {
@@ -125,56 +115,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .item {
-    height: 100vh;
-    background: white;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-
-    input {
-      border-radius: 16px;
-      padding: 4px 8px;
-      margin: 0 8px;
-      background: white;
-    }
-
-    .filter {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      right: 4px;
-      top: 17%;
-
-      li {
-        padding: 0 4px;
-
-        &:nth-child(10) {
-          padding: 0 6px;
-        }
-
-        &.selected {
-          color: white;
-          background: rgb(254, 137, 67);
-        }
-      }
-    }
-
-    a {
-      color: inherit;
-
-      .wrapper {
-        padding: 8px 20px 8px 16px;
-        margin-top: 8px;
-        margin-right: 24px;
-        border-bottom: 1px solid #d4d4d4;
-
-        div {
-
-        }
-      }
-    }
-  }
+  @import "src/style/item";
 </style>

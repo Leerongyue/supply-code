@@ -1,0 +1,49 @@
+.detail {
+
+  main {
+    .total {
+      background: white;
+
+      .goodsDetail {
+        display: flex;
+        justify-content: center;
+        padding: 8px 16px;
+      }
+
+      .kind, .kindName {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 16px;
+        border-bottom: 1px solid white;
+        background: #e1e1e1;;
+      }
+    }
+
+    .content {
+      background: white;
+
+      .shopsList {
+        border-bottom: 0.8px solid #d4d4d4;
+        padding: 8px 16px;
+        text-align: center;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid white;
+        background: #e1e1e1;
+
+        li {
+          padding: 8px 16px;
+        }
+      }
+    }
+  }
+
+  ::v-deep .header {
+    margin-bottom: 0;
+  }
+}

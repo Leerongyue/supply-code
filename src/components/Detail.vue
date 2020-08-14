@@ -3,6 +3,7 @@
     <Head text="商品补货详情" left="1" path="/item"/>
     <main>
       <div class="total">
+        <div class="goodsDetail"><strong>商品详情</strong></div>
         <div class="kind">
           <span v-html="'品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名'"></span>
           <span> {{$store.state.goodsname}}</span>
@@ -15,6 +16,7 @@
         </div>
       </div>
       <div class="content">
+        <div class="shopsList"><strong>门店列表</strong></div>
         <ul v-for="item in goodsList" :key="item.shopname"
         >
           <li v-if="item.barcode===$store.state.barcode">{{item.shopname}}</li>
@@ -73,37 +75,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .detail {
-    /*background: white;*/
-
-    main {
-      .total {
-        background: white;
-
-        div {
-          display: flex;
-          justify-content: space-between;
-          padding: 8px 16px;
-          border-bottom: 1px solid #d4d4d4;
-        }
-      }
-
-      .content {
-
-        ul {
-          margin: 0;
-          padding: 0;
-          display: flex;
-          justify-content: space-between;
-          border-bottom: 1px solid white;
-          background: #d4d4d4;
-
-
-          li {
-            padding: 8px 16px;
-          }
-        }
-      }
-    }
-  }
+  @import "src/style/detail";
 </style>

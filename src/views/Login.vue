@@ -35,7 +35,7 @@
     onLogin() {
       const value = {
         userno: this.userno,
-        pwd: Md5.init(this.password)
+        pwd: Md5.init(this.password),
       };
       if (this.userno === '') {
         message.info('请输入工号', 0.5);
