@@ -32,6 +32,7 @@
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import Head from '@/components/Head.vue';
+  import API from '../../public/api.config';
 
   type ItemName = {
     carddata: { barcode: string; goodsname: string };
@@ -51,7 +52,7 @@
       this.$store.dispatch(
         'getDetail',
         {
-          url: '/goods/ordermx',
+          url: API.getDetailApi,
           method: 'POST',
           value: JSON.stringify(value)
         }).then(res => {

@@ -1,9 +1,8 @@
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/demo/'
+    ? './'
     : '/',
   lintOnSave: false,
-  // publicPath: './',
   devServer: {
     proxy: {
       '/demo': {

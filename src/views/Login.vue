@@ -16,6 +16,7 @@
   import {Md5} from 'md5-typescript';
   import {message} from 'ant-design-vue';
   import Head from '@/components/Head.vue';
+  import API from '../../public/api.config';
 
   @Component({
     components: {Head, Button, Input}
@@ -43,7 +44,7 @@
       } else {
         this.$store.dispatch(
           'login',
-          {url: '/login', method: 'POST', value: JSON.stringify(value)})
+          {url: API.loginApi, method: 'POST', value: JSON.stringify(value)})
           .then(res => {
             console.log(res);
             if (res.data.err_code === '100') {
