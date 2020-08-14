@@ -4,14 +4,12 @@
     <main>
       <div class="total">
         <div class="kind">
-          <span>商品规格</span>
+          <span v-html="'品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名'"></span>
           <span> {{$store.state.goodsname}}</span>
         </div>
         <div class="kindName">
-          <span>品名</span>
-          <span>{{}}</span>
-        </div>
-        <div class="goodNumber">
+          <span>商品规格</span>
+          <span>''</span>
           <span>补货总量</span>
           <span> {{$store.state.number}}</span>
         </div>
@@ -44,7 +42,7 @@
     number = 0;
     goodsList = [];
 
-    beforeCreate() {
+    mounted() {
       const value = {
         creater: 'admin',
         barcode: this.$store.state.barcode
@@ -85,22 +83,24 @@
         div {
           display: flex;
           justify-content: space-between;
-          padding: 6px 16px;
+          padding: 8px 16px;
           border-bottom: 1px solid #d4d4d4;
         }
       }
 
       .content {
+
         ul {
           margin: 0;
           padding: 0;
           display: flex;
           justify-content: space-between;
-          border-bottom: 1px solid #d4d4d4;
-          background: white;
+          border-bottom: 1px solid white;
+          background: #d4d4d4;
+
 
           li {
-            padding: 6px 16px;
+            padding: 8px 16px;
           }
         }
       }

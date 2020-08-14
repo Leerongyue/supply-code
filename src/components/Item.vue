@@ -33,16 +33,19 @@
     </ul>
     <routerLink to="/detail" v-for="item in goodsList" :key="item.barcode">
       <div
+        class="wrapper"
         v-if="trimNumber(item.py).substring(0,1)===type.toLowerCase()
           || type==='#'
-          ||item.barcode.indexOf(input)>=0
-          ||item.py.indexOf(input)>=0"
+          || item.barcode.indexOf(input)>0
+          || item.py.indexOf(input)>0"
         @click="setBarcode(item.barcode,item.asknum,item.goodsname)"
       >
-        {{trimNumber(item.goodsname)}},补货总量 : {{item.asknum}}
-      </div>
-      <div>
-        {{[parseInt(item.barcode)]}}[{{trimNumber(item.py)}}]
+        <div>
+          {{trimNumber(item.goodsname) }},补货总量 : {{item.asknum}}
+        </div>
+        <div>
+          {{[parseInt(item.barcode)]}}[{{trimNumber(item.py)}}]
+        </div>
       </div>
     </routerLink>
   </div>
@@ -103,10 +106,10 @@
       this.$store.commit('transferBarcode', {barcode});
       this.$store.commit('transferNumber', {number});
       this.$store.commit('transferGoodsName', {goodsname});
-      // this.$store.commit('transferShopNumber', {number});
     }
 
     created() {
+      this.$store.commit('getUser');
       this.$store.dispatch(
         'getItem',
         {
@@ -160,13 +163,17 @@
     }
 
     a {
-      border-bottom: 1px solid #d4d4d4;
       color: inherit;
-      padding: 8px 20px 8px 16px;
-      margin-top: 8px;
-      margin-right: 24px;
 
-      div {
+      .wrapper {
+        padding: 8px 20px 8px 16px;
+        margin-top: 8px;
+        margin-right: 24px;
+        border-bottom: 1px solid #d4d4d4;
+
+        div {
+
+        }
       }
     }
   }
