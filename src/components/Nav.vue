@@ -4,9 +4,7 @@
     <router-link to="/item">
       <div class="check">补货查询</div>
     </router-link>
-    <!--    <router-link to="/changePassword">-->
     <div class="change">修改密码</div>
-    <!--    </router-link>-->
     <div class="logout" @click="logout">退出登录</div>
     <div class="copyright">三鑫科技 @2020 copyright All rights reserved</div>
   </div>
@@ -23,7 +21,7 @@
   export default class Nav extends Vue {
     logout() {
       this.$store.commit('saveUser', {user: null});
-      this.$router.push('/login');
+      this.$router.replace('/login');
     }
   }
 
