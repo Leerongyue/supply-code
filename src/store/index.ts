@@ -8,15 +8,16 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: null,
-    barcode: '',
-    number: '',
-    goodsname: '',
-    shopnumber: 0
+    user: {
+      userno: '',
+      password: '',
+      barcode: '',
+      asknum: '',
+      stocknum: '',
+    },
   },
   mutations: {
     saveUser(state, payload) {
-      state.user = payload.user;
       setItem('user', JSON.stringify(payload.user));
     },
     getUser(state) {
@@ -25,18 +26,24 @@ export default new Vuex.Store({
     saveItem(state, payload) {
       console.log(1);
     },
-    transferBarcode(state, payload) {
-      state.barcode = payload.barcode;
-    },
-    transferNumber(state, payload) {
-      state.number = payload.number;
-    },
-    transferGoodsName(state, payload) {
-      state.goodsname = payload.goodsname;
-    },
-    transferShopNumber(state, payload) {
-      state.shopnumber = payload.shopnumber;
-    },
+    // saveBarcode(state, payload) {
+    //   setItem('barcode', JSON.stringify(payload.barcode));
+    // },
+    // getBarcode(state) {
+    //   state.barcode = getItem('barcode');
+    // },
+    // saveAskNum(state, payload) {
+    //   setItem('asknum', JSON.stringify(payload.asknum));
+    // },
+    // getAskNum(state) {
+    //   state.asknum = getItem('asknum');
+    // },
+    // saveStockNum(state, payload) {
+    //   setItem('stocknum', JSON.stringify(payload.stocknum));
+    // },
+    // getStockNum(state) {
+    //   state.stocknum = getItem('stocknum');
+    // },
   },
   actions: {
     async login({commit}, payload) {

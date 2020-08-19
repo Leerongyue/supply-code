@@ -6,21 +6,23 @@
         <div class="goodsDetail"><strong>商品详情</strong></div>
         <div class="kind">
           <span v-html="'品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名'"></span>
-          <span> {{$store.state.goodsname}}</span>
+          <span>{{goodsList[0].goodsname}}</span>
         </div>
         <div class="kindName">
           <span>商品规格</span>
-          <span>''</span>
+          <span>{{goodsList[0].spec}}</span>
+          <span>库存总量</span>
+          <span>{{$store.state.user.stocknum}}</span>
           <span>补货总量</span>
-          <span> {{$store.state.number}}</span>
+          <span>{{$store.state.user.asknum}}</span>
         </div>
       </div>
       <div class="content">
         <div class="shopsList"><strong>门店列表</strong></div>
-        <ul v-for="item in goodsList" :key="item.shopname"
+        <ul v-for="(item,index) in goodsList" :key="index"
         >
-          <li v-if="item.barcode===$store.state.barcode">{{item.shopname}}</li>
-          <li v-if="item.barcode===$store.state.barcode">{{item.asknum}}</li>
+          <li v-if="item.barcode===$store.state.user.barcode">{{item.shopname}}</li>
+          <li v-if="item.barcode===$store.state.user.barcode">{{item.asknum}}</li>
         </ul>
       </div>
     </main>
@@ -35,19 +37,32 @@
   import API from '../../public/api.config';
 
   type ItemName = {
-    carddata: { barcode: string; goodsname: string };
+    carddata: Item;
+  }
+  type Item = {
+    asknum: string;
+    barcode: string;
+    enddate: string;
+    goodsname: string;
+    pbillno: string;
+    py: string;
+    shopcode: string;
+    shopname: string;
+    spec: string;
+    startdate: string;
   }
   @Component({
     components: {Head}
   })
   export default class Detail extends Vue {
     number = 0;
-    goodsList = [];
+    goodsList: Item[] = [];
 
-    mounted() {
+    created() {
+      this.$store.commit('getUser');
       const value = {
-        creater: 'admin',
-        barcode: this.$store.state.barcode
+        creater: this.$store.state.user.userno,
+        barcode: this.$store.state.user.barcode
       };
       this.$store.dispatch(
         'getDetail',
@@ -60,17 +75,6 @@
         this.goodsList = res.data.resultObj.map((item: ItemName) => item.carddata);
       });
     }
-
-    get total() {
-      const x = this.goodsList.map((g: { asknum: string }) => g.asknum);
-      return x;
-
-    }
-
-    onBack() {
-      this.$router.push('/item');
-    }
-
   }
 </script>
 

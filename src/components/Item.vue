@@ -31,17 +31,17 @@
       <li :class="type==='Y' && 'selected'" @click="select($event.target.innerHTML)">Y</li>
       <li :class="type==='Z' && 'selected'" @click="select($event.target.innerHTML)">Z</li>
     </ul>
-    <routerLink
-      to="/detail"
+    <div
+      class="xxx"
       v-for="(item,index) in list(input,type)" :key="index"
-      @click="setBarcode(item.barcode,item.asknum,item.goodsname)">
+      @click="setBarcode(item.barcode,item.asknum,item.stocknum)">
       <div>
         {{item.goodsname}}
       </div>
       <div>
         {{item.barcode}} , {{item.py}}
       </div>
-    </routerLink>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -50,6 +50,7 @@
   import Input from '@/components/Input.vue';
   import Head from '@/components/Head.vue';
   import API from '../../public/api.config';
+  import Bus from '@/helper/bus';
 
   type ItemName = {
     carddata: ItemData;
@@ -101,11 +102,14 @@
       return str.replace(/\d+/g, '');
     }
 
-    setBarcode(barcode: string, number: string, goodsname: string) {
-      this.$store.commit('transferBarcode', {barcode});
-      this.$store.commit('transferNumber', {number});
-      this.$store.commit('transferGoodsName', {goodsname});
+    setBarcode(barcode: string, asknum: string, stocknum: string) {
+      this.$store.commit('getUser');
+      this.$store.commit(
+        'saveUser',
+        {user: {userno: this.$store.state.user.userno, barcode, asknum, stocknum}});
+      this.$router.push('/detail');
     }
+
 
     created() {
       this.$store.commit('getUser');
