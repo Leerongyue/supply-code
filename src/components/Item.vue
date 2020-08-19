@@ -33,13 +33,13 @@
     </ul>
     <routerLink
       to="/detail"
-      v-for="(item,index) in list(input)" :key="index"
+      v-for="(item,index) in list(input,type)" :key="index"
       @click="setBarcode(item.barcode,item.asknum,item.goodsname)">
       <div>
-        {{trimNumber(item.goodsname) }},补货总量 : {{item.asknum}}
+        {{item.goodsname}}
       </div>
       <div>
-        {{[parseInt(item.barcode)]}}[{{trimNumber(item.py)}}]
+        {{item.barcode}} , {{item.py}}
       </div>
     </routerLink>
   </div>
@@ -70,13 +70,14 @@
     input = '';
 
     get list() {
-      return (input: string) => {
+      return (input: string, code: string) => {
         const newGoodList: ItemData[] = [];
         this.goodsList.map((item: ItemData) => {
           if (
             item.barcode.indexOf(input) > 0 ||
             item.py.indexOf(input) > 0 ||
-            input === '' || item.py.substring(0, 1) === this.type.toLowerCase() || this.type === '#') {
+            this.trimNumber(item.py).substring(0, 1) === code.toLowerCase() ||
+            code === '#') {
             newGoodList.push(item);
           }
         });
