@@ -31,10 +31,8 @@
       <li :class="type==='Y' && 'selected'" @click="select($event.target.innerHTML)">Y</li>
       <li :class="type==='Z' && 'selected'" @click="select($event.target.innerHTML)">Z</li>
     </ul>
-    <div
-      class="xxx"
-      v-for="(item,index) in list(input,type)" :key="index"
-      @click="setBarcode(item.barcode,item.asknum,item.stocknum)">
+    <div class="xxx" v-for="(item,index) in list(input,type)" :key="index"
+         @click="onGo(item.barcode,item.asknum,item.stocknum)">
       <div>
         {{item.goodsname}}
       </div>
@@ -52,13 +50,6 @@
   import API from '../../public/api.config';
   import Bus from '@/helper/bus';
 
-  type ItemName = {
-    carddata: ItemData;
-  }
-  type ItemData = {
-    barcode: string; goodsname: string; py: string;
-  }
-
   @Component({
     components: {Head, Input}
   })
@@ -69,6 +60,10 @@
     type = '#';
     goodsList: ItemData[] = [];
     input = '';
+    barcode = '';
+    asknum = '';
+    stocknum = '';
+
 
     get list() {
       return (input: string, code: string) => {
@@ -102,14 +97,16 @@
       return str.replace(/\d+/g, '');
     }
 
-    setBarcode(barcode: string, asknum: string, stocknum: string) {
-      this.$store.commit('getUser');
-      this.$store.commit(
-        'saveUser',
-        {user: {userno: this.$store.state.user.userno, barcode, asknum, stocknum}});
+    onGo(barcode: string, asknum: string, stocknum: string) {
+      this.barcode = barcode;
+      this.asknum = asknum;
+      this.stocknum = stocknum;
       this.$router.push('/detail');
     }
 
+    beforeDestroy() {
+      Bus.$emit('transfer', JSON.stringify({barcode: this.barcode, asknum: this.asknum, stocknum: this.stocknum}));
+    }
 
     created() {
       this.$store.commit('getUser');
@@ -121,7 +118,7 @@
           value: JSON.stringify({creater: this.$store.state.user.userno})
         }).then(res => {
         console.log(res);
-        this.goodsList = res.data.resultObj.map((item: ItemName) => item.carddata);
+        this.goodsList = res.data.resultObj.map((item: ItemName) => item.carddata);//[{},{},...]
       });
     }
   }

@@ -51,7 +51,7 @@
             } else {
               this.$store.commit(
                 'saveUser',
-                {user: {userno: this.userno, password: this.password, barcode: '', asknum: '', stocknum: ''}});
+                {user: {userno: this.userno}});
               this.$router.push('/nav');
             }
           });

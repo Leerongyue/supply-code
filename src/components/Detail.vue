@@ -12,17 +12,17 @@
           <span>商品规格</span>
           <span>{{goodsList[0].spec}}</span>
           <span>库存总量</span>
-          <span>{{$store.state.user.stocknum}}</span>
+          <span>{{stocknum}}</span>
           <span>补货总量</span>
-          <span>{{$store.state.user.asknum}}</span>
+          <span>{{asknum}}</span>
         </div>
       </div>
       <div class="content">
         <div class="shopsList"><strong>门店列表</strong></div>
         <ul v-for="(item,index) in goodsList" :key="index"
         >
-          <li v-if="item.barcode===$store.state.user.barcode">{{item.shopname}}</li>
-          <li v-if="item.barcode===$store.state.user.barcode">{{item.asknum}}</li>
+          <li v-if="item.barcode===barcode">{{item.shopname}}</li>
+          <li v-if="item.barcode===barcode">{{item.asknum}}</li>
         </ul>
       </div>
     </main>
@@ -35,34 +35,29 @@
   import {Component} from 'vue-property-decorator';
   import Head from '@/components/Head.vue';
   import API from '../../public/api.config';
+  import Bus from '@/helper/bus';
 
-  type ItemName = {
-    carddata: Item;
-  }
-  type Item = {
-    asknum: string;
-    barcode: string;
-    enddate: string;
-    goodsname: string;
-    pbillno: string;
-    py: string;
-    shopcode: string;
-    shopname: string;
-    spec: string;
-    startdate: string;
-  }
+
   @Component({
     components: {Head}
   })
   export default class Detail extends Vue {
     number = 0;
     goodsList: Item[] = [];
+    barcode = '';
+    asknum = '';
+    stocknum = '';
 
     created() {
+      Bus.$on('transfer', (res: { barcode: string; asknum: string; stocknum: string }) => {
+        this.barcode = res.barcode;
+        this.asknum = res.asknum;
+        this.stocknum = res.stocknum;
+      });
       this.$store.commit('getUser');
       const value = {
         creater: this.$store.state.user.userno,
-        barcode: this.$store.state.user.barcode
+        barcode: this.barcode
       };
       this.$store.dispatch(
         'getDetail',
@@ -72,8 +67,12 @@
           value: JSON.stringify(value)
         }).then(res => {
         console.log(res);
-        this.goodsList = res.data.resultObj.map((item: ItemName) => item.carddata);
+        this.goodsList = res.data.resultObj.map((item: ItemNameDetail) => item.carddata);
       });
+    }
+
+    beforeDestroy() {
+      Bus.$off('transfer');
     }
   }
 </script>
