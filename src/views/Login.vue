@@ -39,8 +39,6 @@
       };
       if (this.userno === '') {
         message.info('请输入工号', 0.5);
-      } else if (this.password === '') {
-        message.info('请输入密码', 0.5);
       } else {
         this.$store.dispatch(
           'login',

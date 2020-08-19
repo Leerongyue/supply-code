@@ -31,21 +31,15 @@
       <li :class="type==='Y' && 'selected'" @click="select($event.target.innerHTML)">Y</li>
       <li :class="type==='Z' && 'selected'" @click="select($event.target.innerHTML)">Z</li>
     </ul>
-    <routerLink to="/detail" v-for="item in goodsList" :key="item.barcode">
-      <div
-        class="wrapper"
-        v-if="trimNumber(item.py).substring(0,1)===type.toLowerCase()
-          || type==='#'
-          || item.barcode.indexOf(input)>0
-          || item.py.indexOf(input)>0"
-        @click="setBarcode(item.barcode,item.asknum,item.goodsname)"
-      >
-        <div>
-          {{trimNumber(item.goodsname) }},补货总量 : {{item.asknum}}
-        </div>
-        <div>
-          {{[parseInt(item.barcode)]}}[{{trimNumber(item.py)}}]
-        </div>
+    <routerLink
+      to="/detail"
+      v-for="(item,index) in list(input)" :key="index"
+      @click="setBarcode(item.barcode,item.asknum,item.goodsname)">
+      <div>
+        {{trimNumber(item.goodsname) }},补货总量 : {{item.asknum}}
+      </div>
+      <div>
+        {{[parseInt(item.barcode)]}}[{{trimNumber(item.py)}}]
       </div>
     </routerLink>
   </div>
@@ -58,7 +52,10 @@
   import API from '../../public/api.config';
 
   type ItemName = {
-    carddata: { barcode: string; goodsname: string };
+    carddata: ItemData;
+  }
+  type ItemData = {
+    barcode: string; goodsname: string; py: string;
   }
 
   @Component({
@@ -69,8 +66,23 @@
       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
       'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     type = '#';
-    goodsList = [];
+    goodsList: ItemData[] = [];
     input = '';
+
+    get list() {
+      return (input: string) => {
+        const newGoodList: ItemData[] = [];
+        this.goodsList.map((item: ItemData) => {
+          if (
+            item.barcode.indexOf(input) > 0 ||
+            item.py.indexOf(input) > 0 ||
+            input === '' || item.py.substring(0, 1) === this.type.toLowerCase() || this.type === '#') {
+            newGoodList.push(item);
+          }
+        });
+        return newGoodList;
+      };
+    }
 
     onInput() {
       if (this.input === '') {
@@ -86,10 +98,6 @@
 
     trimNumber(str: string) {
       return str.replace(/\d+/g, '');
-    }
-
-    onBack() {
-      this.$router.push('/');
     }
 
     setBarcode(barcode: string, number: string, goodsname: string) {
