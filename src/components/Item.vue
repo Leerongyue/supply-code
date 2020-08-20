@@ -69,10 +69,15 @@
       return (input: string, code: string) => {
         const newGoodList: ItemData[] = [];
         this.goodsList.map((item: ItemData) => {
-          if (
-            item.barcode.indexOf(input) > 0 ||
-            item.py.indexOf(input) > 0 ||
-            this.trimNumber(item.py).substring(0, 1) === code.toLowerCase() ||
+          let barcodeNum = item.barcode.indexOf(input);
+          let pyNum = this.trim(item.py).trim().indexOf(input);
+          if (input === '') {
+            barcodeNum = -1;
+            pyNum = -1;
+          }
+          if (barcodeNum >= 0 ||
+            pyNum >= 0 ||
+            this.trim(item.py).substring(0, 1) === code.toLowerCase() ||
             code === '#') {
             newGoodList.push(item);
           }
@@ -82,19 +87,15 @@
     }
 
     onInput() {
-      if (this.input === '') {
-        this.type = '#';
-      } else {
-        this.type = '';
-      }
+      this.type = this.input === '' ? '#' : '';
     }
 
     select(value: string) {
       this.type = value;
     }
 
-    trimNumber(str: string) {
-      return str.replace(/\d+/g, '');
+    trim(str: string) {
+      return str.replace(/\d+|\s+/g, '');
     }
 
     onGo(barcode: string, asknum: string, stocknum: string) {
@@ -103,7 +104,7 @@
       this.stocknum = stocknum;
       this.$router.push({path: '/detail', query: {barcode, asknum, stocknum}});
     }
-    
+
     created() {
       this.$store.commit('getUser');
       this.$store.dispatch(
