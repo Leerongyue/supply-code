@@ -70,7 +70,7 @@
         const newGoodList: ItemData[] = [];
         this.goodsList.map((item: ItemData) => {
           let barcodeNum = item.barcode.indexOf(input);
-          let pyNum = this.trim(item.py).trim().indexOf(input);
+          let pyNum = item.py.indexOf(input);
           if (!input) {
             barcodeNum = -1;
             pyNum = -1;
