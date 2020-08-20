@@ -13,7 +13,6 @@
         <div> {{$store.state.user.userno}}已登录</div>
         <div class="logout" @click="onLogout">退出登录</div>
       </div>
-
     </div>
   </div>
 </template>
@@ -78,41 +77,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .wrapper {
-    height: 100vh;
-    background: white;
-    position: relative;
-
-    .login {
-      .bind {
-        text-align: center;
-        padding: 16px 0;
-        background: white;
-        margin-bottom: 4px;
-      }
-
-      ::v-deep button {
-        border-radius: 4px;
-      }
-
-      ::v-deep .btn {
-        margin: 0 32px;
-      }
-    }
-
-    .logined {
-      font-size: 24px;
-      text-align: center;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-
-      .logout {
-        color: blue;
-        margin-top: 12px;
-      }
-    }
-  }
-
+  @import "src/style/login";
 </style>
