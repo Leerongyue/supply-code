@@ -34,7 +34,7 @@
     <div class="xxx" v-for="(item,index) in list(input,type)" :key="index"
          @click="onGo(item.barcode,item.asknum,item.stocknum)">
       <div>
-        {{item.goodsname}}
+        {{item.goodsname}} , {{item.stocknum}}
       </div>
       <div>
         {{item.barcode}} , {{item.py}}
@@ -105,7 +105,7 @@
     }
 
     beforeDestroy() {
-      Bus.$emit('transfer', JSON.stringify({barcode: this.barcode, asknum: this.asknum, stocknum: this.stocknum}));
+      Bus.$emit('transfer', {barcode: this.barcode, asknum: this.asknum, stocknum: this.stocknum});
     }
 
     created() {

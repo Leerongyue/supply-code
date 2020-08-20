@@ -1,10 +1,20 @@
 <template>
-  <div class="login">
-    <Head text="三鑫补货系统" left='0'/>
-    <div class="bind"><strong>员工登录</strong></div>
-    <Input type="text" name="工号" placeholder="请输入工号" v-model="userno"/>
-    <Input type="password" name="密码" placeholder="请输入密码" v-model="password"/>
-    <Button name="立即登录" @click.native="onLogin">立即登录</Button>
+  <div class="wrapper">
+    <div class="login" v-if="!user">
+      <Head text="三鑫补货系统" left='0'/>
+      <div class="bind"><strong>员工登录</strong></div>
+      <Input type="text" name="工号" placeholder="请输入工号" v-model="userno"/>
+      <Input type="password" name="密码" placeholder="请输入密码" v-model="password"/>
+      <Button name="立即登录" @click.native="onLogin">立即登录</Button>
+    </div>
+    <div v-if="user">
+      <Head text="三鑫补货系统" left='0' right="1" path="/nav"/>
+      <div class="logined">
+        <div> {{$store.state.user.userno}}已登录</div>
+        <div class="logout" @click="onLogout">退出登录</div>
+      </div>
+
+    </div>
   </div>
 </template>
 
@@ -32,6 +42,10 @@
       this.password = user ? user.password : '';
     }
 
+    get user() {
+      return this.$store.state.user;
+    }
+
     onLogin() {
       const value = {
         userno: this.userno,
@@ -51,33 +65,57 @@
             } else {
               this.$store.commit(
                 'saveUser',
-                {user: {userno: this.userno}});
+                {user: {userno: this.userno, password: this.password}});
               this.$router.push('/nav');
             }
           });
       }
     }
+
+    onLogout() {
+      this.$store.commit('saveUser', {user: null});
+      this.$store.commit('getUser');
+      this.$router.go(0);
+    }
   }
 </script>
 
 <style lang="scss" scoped>
-  .login {
+  .wrapper {
     height: 100vh;
     background: white;
+    position: relative;
 
-    .bind {
+    .login {
+      .bind {
+        text-align: center;
+        padding: 16px 0;
+        background: white;
+        margin-bottom: 4px;
+      }
+
+      ::v-deep button {
+        border-radius: 4px;
+      }
+
+      ::v-deep .btn {
+        margin: 0 32px;
+      }
+    }
+
+    .logined {
+      font-size: 24px;
       text-align: center;
-      padding: 16px 0;
-      background: white;
-      margin-bottom: 4px;
-    }
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
 
-    ::v-deep button {
-      border-radius: 4px;
-    }
-
-    ::v-deep .btn {
-      margin: 0 32px;
+      .logout {
+        color: blue;
+        margin-top: 12px;
+      }
     }
   }
+
 </style>

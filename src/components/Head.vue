@@ -4,6 +4,9 @@
       <a-icon type="left" class="left"/>
     </router-link>
     <div><strong>{{text}}</strong></div>
+    <router-link :to="path" v-if="right==='1'">
+      <a-icon type="right" class="right"/>
+    </router-link>
   </div>
 </template>
 
@@ -15,6 +18,7 @@
   export default class Head extends Vue {
     @Prop(String) text!: string;
     @Prop(String) left?: string;
+    @Prop(String) right?: string;
     @Prop(String) path?: string;
   }
 </script>
@@ -35,6 +39,14 @@
         left: 0;
         top: 0;
         transform: translate(16px, 100%);
+        color: white;
+      }
+
+      .right {
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: translate(-16px, 100%);
         color: white;
       }
     }

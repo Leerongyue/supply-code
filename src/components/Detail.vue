@@ -5,15 +5,15 @@
       <div class="total">
         <div class="goodsDetail"><strong>商品详情</strong></div>
         <div class="kind">
-          <span v-html="'品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名'"></span>
-          <span>{{goodsList[0].goodsname}}</span>
+          <span class="name" v-html="'品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名'"></span>
+          <span>{{goodsname}}</span>
         </div>
         <div class="kindName">
           <span>商品规格</span>
-          <span>{{goodsList[0].spec}}</span>
+          <span class="spec">{{spec}}</span>
           <span>库存总量</span>
-          <span>{{stocknum}}</span>
-          <span>补货总量</span>
+          <span class="stock">{{stocknum}}</span>
+          <span class="asknum">补货总量</span>
           <span>{{asknum}}</span>
         </div>
       </div>
@@ -48,11 +48,33 @@
     asknum = '';
     stocknum = '';
 
+    get goodsname() {
+      const x: any[] = [];
+      this.goodsList.map(item => {
+        if (item.barcode === this.barcode) {
+          x.push(item.goodsname);
+        }
+      });
+      return x[0];
+    }
+
+    get spec() {
+      const x: any[] = [];
+      this.goodsList.map(item => {
+        if (item.barcode === this.barcode) {
+          x.push(item.spec);
+        }
+      });
+      return x[0];
+    }
+
+
     created() {
-      Bus.$on('transfer', (res: { barcode: string; asknum: string; stocknum: string }) => {
+      Bus.$on('transfer', (res: { goodsname: string; barcode: string; asknum: string; stocknum: string }) => {
         this.barcode = res.barcode;
         this.asknum = res.asknum;
         this.stocknum = res.stocknum;
+        console.log(res);
       });
       this.$store.commit('getUser');
       const value = {
