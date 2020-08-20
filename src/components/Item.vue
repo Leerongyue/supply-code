@@ -71,7 +71,7 @@
         this.goodsList.map((item: ItemData) => {
           let barcodeNum = item.barcode.indexOf(input);
           let pyNum = this.trim(item.py).trim().indexOf(input);
-          if (input === '') {
+          if (!input) {
             barcodeNum = -1;
             pyNum = -1;
           }
@@ -87,7 +87,7 @@
     }
 
     onInput() {
-      this.type = this.input === '' ? '#' : '';
+      this.type = !this.input ? '#' : '';
     }
 
     select(value: string) {
