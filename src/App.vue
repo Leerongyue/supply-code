@@ -1,8 +1,26 @@
 <template>
   <div id="app">
-      <router-view/>
+    <router-view v-if="data.isRouterAlive"/>
   </div>
 </template>
+<script lang="ts">
+  import Vue from 'vue';
+  import {Component, Provide} from 'vue-property-decorator';
+
+
+  @Component
+  export default class Detail extends Vue {
+    data = {isRouterAlive: true};
+    @Provide('reload') private providedValue = this.reload;
+
+    reload() {
+      this.data.isRouterAlive = false;
+      this.$nextTick(function () {
+        this.data.isRouterAlive = true;
+      });
+    }
+  }
+</script>
 
 <style lang="scss">
   @import "src/style/reset";
