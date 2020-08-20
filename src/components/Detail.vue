@@ -68,14 +68,11 @@
       return x[0];
     }
 
-
     created() {
-      Bus.$on('transfer', (res: { goodsname: string; barcode: string; asknum: string; stocknum: string }) => {
-        this.barcode = res.barcode;
-        this.asknum = res.asknum;
-        this.stocknum = res.stocknum;
-        console.log(res);
-      });
+      const queryObj = this.$route.query as { barcode: string; asknum: string; stocknum: string };
+      this.barcode = queryObj.barcode;
+      this.asknum = queryObj.asknum;
+      this.stocknum = queryObj.stocknum;
       this.$store.commit('getUser');
       const value = {
         creater: this.$store.state.user.userno,
@@ -91,10 +88,6 @@
         console.log(res);
         this.goodsList = res.data.resultObj.map((item: ItemNameDetail) => item.carddata);
       });
-    }
-
-    beforeDestroy() {
-      Bus.$off('transfer');
     }
   }
 </script>

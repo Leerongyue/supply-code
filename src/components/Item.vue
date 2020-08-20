@@ -34,7 +34,7 @@
     <div class="xxx" v-for="(item,index) in list(input,type)" :key="index"
          @click="onGo(item.barcode,item.asknum,item.stocknum)">
       <div>
-        {{item.goodsname}} , {{item.stocknum}}
+        {{item.goodsname}} , 库存:{{item.stocknum}}
       </div>
       <div>
         {{item.barcode}} , {{item.py}}
@@ -101,13 +101,9 @@
       this.barcode = barcode;
       this.asknum = asknum;
       this.stocknum = stocknum;
-      this.$router.push('/detail');
+      this.$router.push({path: '/detail', query: {barcode, asknum, stocknum}});
     }
-
-    beforeDestroy() {
-      Bus.$emit('transfer', {barcode: this.barcode, asknum: this.asknum, stocknum: this.stocknum});
-    }
-
+    
     created() {
       this.$store.commit('getUser');
       this.$store.dispatch(
