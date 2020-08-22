@@ -1,12 +1,12 @@
 <template>
   <div class="downNav">
-    <router-link to="/login" exact active-class="selected" class="list">
-      <a-icon type="check-circle"/>
-      <span>登录</span>
-    </router-link>
+<!--    <router-link to="/login" exact active-class="selected" class="list">-->
+    <!--      <a-icon type="check-circle"/>-->
+    <!--      <span>登录</span>-->
+    <!--    </router-link>-->
     <router-link to="/nav" active-class="selected" class="list">
       <a-icon type="plus-circle"/>
-      <span>补货</span>
+      <span>主页</span>
     </router-link>
     <router-link to="/my" active-class="selected" class="list">
       <a-icon type="smile"/>

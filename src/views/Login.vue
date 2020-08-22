@@ -1,19 +1,11 @@
 <template>
-  <Layout class="wrapper">
-    <div class="login" v-if="!$store.state.user">
-      <Head text="三鑫补货系统" left='0'/>
-      <div class="bind"><strong>员工登录</strong></div>
-      <Input type="text" name="工号" placeholder="请输入工号" v-model="userno"/>
-      <Input type="password" name="密码" placeholder="请输入密码" v-model="password"/>
-      <Button name="立即登录" @click.native="onLogin">立即登录</Button>
-    </div>
-    <div v-if="$store.state.user">
-      <Head text="三鑫补货系统" left='0' right="0" path="/nav"/>
-      <div class="logined">
-        <div class="logout" @click="onLogout">退出登录</div>
-      </div>
-    </div>
-  </Layout>
+  <div class="login" v-if="!$store.state.user">
+    <Head text="三鑫补货系统" left='0'/>
+    <div class="bind"><strong>员工登录</strong></div>
+    <Input type="text" name="工号" placeholder="请输入工号" v-model="userno"/>
+    <Input type="password" name="密码" placeholder="请输入密码" v-model="password"/>
+    <Button name="立即登录" @click.native="onLogin">立即登录</Button>
+  </div>
 </template>
 
 <script lang="ts">
@@ -65,12 +57,6 @@
             }
           });
       }
-    }
-
-    onLogout() {
-      this.$store.commit('saveUser', {user: null});
-      this.$store.commit('getUser');
-      this.injectedValue();
     }
   }
 </script>

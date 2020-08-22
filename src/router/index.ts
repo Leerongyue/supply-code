@@ -8,6 +8,8 @@ import Nav from '@/components/Nav.vue';
 import ChangePassword from '@/components/ChangePassword.vue';
 import Logout from '@/components/Logout.vue';
 import My from '@/components/My.vue';
+import store from '../store/index';
+import {message} from 'ant-design-vue';
 
 Vue.use(VueRouter);
 
@@ -22,27 +24,33 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/item',
-    component: Item
+    component: Item,
+    meta: {requireAuth: true}
   },
   {
     path: '/detail',
-    component: Detail
+    component: Detail,
+    meta: {requireAuth: true}
   },
   {
     path: '/nav',
-    component: Nav
+    component: Nav,
+    meta: {requireAuth: true}
   },
   {
     path: '/changePassword',
-    component: ChangePassword
+    component: ChangePassword,
+    meta: {requireAuth: true}
   },
   {
     path: '/logout',
-    component: Logout
+    component: Logout,
+    meta: {requireAuth: true}
   },
   {
     path: '/my',
-    component: My
+    component: My,
+    meta: {requireAuth: true}
   },
   {
     path: '*',
@@ -52,6 +60,22 @@ const routes: Array<RouteConfig> = [
 
 const router = new VueRouter({
   routes
+});
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requireAuth)) {
+    store.commit('getUser');
+    if (!store.state.user) {
+      message.info('请先绑定个人信息', 0.6);
+      next({
+        path: '/login',
+        // query: {redirect: to.fullPath}
+      });
+    } else {
+      next();
+    }
+  } else {
+    next(); // 确保一定要调用 next()
+  }
 });
 
 export default router;

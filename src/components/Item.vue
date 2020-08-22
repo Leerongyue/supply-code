@@ -42,10 +42,10 @@
         </div>
       </div>
     </div>
-    <div class="notice" v-if="!$store.state.user">
-      <span>请登录后查看</span>
-      <router-link to="/login">立即登录</router-link>
-    </div>
+    <!--    <div class="notice" v-if="!$store.state.user">-->
+    <!--      <span>请登录后查看</span>-->
+    <!--      <router-link to="/login">立即登录</router-link>-->
+    <!--    </div>-->
   </div>
 </template>
 <script lang="ts">
