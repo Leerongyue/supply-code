@@ -5,7 +5,6 @@
       <div v-if="$store.state.user">{{$store.state.user.userno}}已登录</div>
       <router-link v-if="!$store.state.user" to="/login">立即登录</router-link>
     </div>
-
   </Layout>
 </template>
 
@@ -33,6 +32,10 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
+
+      a {
+        color: rgb(0, 192, 239)
+      }
     }
   }
 
