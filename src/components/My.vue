@@ -18,7 +18,9 @@
     components: {Head, Layout}
   })
   export default class My extends Vue {
-
+    created() {
+      this.$store.commit('getUser');
+    }
   }
 </script>
 
