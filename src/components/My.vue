@@ -34,7 +34,7 @@
       transform: translate(-50%, -50%);
 
       a {
-        color: rgb(0, 192, 239)
+        color: rgb(82, 102, 237);
       }
     }
   }
