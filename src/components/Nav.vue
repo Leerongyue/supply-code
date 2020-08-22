@@ -2,11 +2,11 @@
   <div class="nav">
     <Head text="三鑫补货系统" left="1" path="/login"/>
     <router-link to="/item">
-      <div class="check">补货查询</div>
+      <Tab name="补货查询" type="setting"/>
     </router-link>
-    <div class="change">修改密码</div>
-    <div class="logout" @click="logout">退出登录</div>
-    <div class="copyright">三鑫科技 @2020 copyright All rights reserved</div>
+    <Tab name="修改密码" type="form"/>
+    <Tab name="退出登录" type="delete" @click.native="onLogout"/>
+    <DownNav/>
   </div>
 </template>
 
@@ -14,47 +14,31 @@
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import Head from '@/components/Head.vue';
+  import Tab from '@/components/Tab.vue';
+  import DownNav from '@/components/DownNav.vue';
 
   @Component({
-    components: {Head}
+    components: {DownNav, Tab, Head}
   })
   export default class Nav extends Vue {
-    logout() {
+    onLogout() {
       this.$store.commit('saveUser', {user: null});
       this.$router.replace('/login');
     }
   }
-
 </script>
 
 <style lang="scss" scoped>
   .nav {
-    background: white;
+    min-height: 100vh;
+    font-size: 18px;
 
-    .check {
-      background: rgb(0, 192, 239);
+    ::v-deep.header {
+      margin-bottom: 40px;
     }
 
-    .change {
-      background: rgb(0, 166, 90);
-    }
-
-    .logout {
-      background: rgb(243, 156, 18);
-    }
-
-    .check, .logout, .change {
-      text-align: center;
-      width: 90vw;
-      padding: 68px 0;
-      color: white;
-      font-size: 24px;
-      margin: 16px auto;
-    }
-
-    .copyright {
-      text-align: center;
-      margin-top: 64px;
+    a {
+      color: inherit;
     }
   }
 </style>

@@ -34,9 +34,6 @@
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import Head from '@/components/Head.vue';
-  import API from '../../public/api.config';
-  import Bus from '@/helper/bus';
-
 
   @Component({
     components: {Head}
@@ -81,7 +78,7 @@
       this.$store.dispatch(
         'getDetail',
         {
-          url: API.getDetailApi,
+          url: '/sx/order/goods/ordermx',
           method: 'POST',
           value: JSON.stringify(value)
         }).then(res => {

@@ -47,8 +47,6 @@
   import {Component} from 'vue-property-decorator';
   import Input from '@/components/Input.vue';
   import Head from '@/components/Head.vue';
-  import API from '../../public/api.config';
-  import Bus from '@/helper/bus';
 
   @Component({
     components: {Head, Input}
@@ -110,7 +108,7 @@
       this.$store.dispatch(
         'getItem',
         {
-          url: API.getItemApi,
+          url: '/sx/order/goods/shophz',
           method: 'POST',
           value: JSON.stringify({creater: this.$store.state.user.userno})
         }).then(res => {
