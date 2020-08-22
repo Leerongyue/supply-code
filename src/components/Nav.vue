@@ -1,6 +1,6 @@
 <template>
   <Layout class="nav">
-    <Head text="三鑫补货系统" left="1" path="/login"/>
+    <Head text="三鑫补货系统" left="0" path="/login"/>
     <router-link to="/item">
       <Tab name="补货查询" type="setting"/>
     </router-link>

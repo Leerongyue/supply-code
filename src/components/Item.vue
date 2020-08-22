@@ -1,7 +1,7 @@
 <template>
   <div class="item">
     <Head text="商品列表" left="1" path="/nav"/>
-    <div class="logined-item" v-if="$store.state.user">
+    <div class="logined-item">
       <input type="text" placeholder="请输入商品条码或拼音助记码" v-model="input" @input="onInput">
       <ul class="filter">
         <li :class="type==='#' && 'selected'" @click="select($event.target.innerHTML)">#</li>
@@ -73,13 +73,16 @@
         const newGoodList: ItemData[] = [];
         this.goodsList.map((item: ItemData) => {
           let barcodeNum = item.barcode.indexOf(input);
-          let pyNum = item.py.indexOf(input);
+          let pyNumUpperCase = item.py.toUpperCase().indexOf(input);
+          let pyNumLowerCase = item.py.toLowerCase().indexOf(input);
           if (!input) {
             barcodeNum = -1;
-            pyNum = -1;
+            pyNumUpperCase = -1;
+            pyNumLowerCase = -1;
           }
           if (barcodeNum >= 0 ||
-            pyNum >= 0 ||
+            pyNumUpperCase >= 0 ||
+            pyNumLowerCase >= 0 ||
             this.trim(item.py).substring(0, 1) === code.toLowerCase() ||
             code === '#') {
             newGoodList.push(item);
@@ -110,16 +113,18 @@
 
     created() {
       this.$store.commit('getUser');
-      this.$store.dispatch(
-        'getItem',
-        {
-          url: '/sx/order/goods/shophz',
-          method: 'POST',
-          value: JSON.stringify({creater: this.$store.state.user.userno})
-        }).then(res => {
-        console.log(res);
-        this.goodsList = res.data.resultObj.map((item: ItemName) => item.carddata);//[{},{},...]
-      });
+      if (this.$store.state.user) {
+        this.$store.dispatch(
+          'getItem',
+          {
+            url: '/sx/order/goods/shophz',
+            method: 'POST',
+            value: JSON.stringify({creater: this.$store.state.user.userno})
+          }).then(res => {
+          console.log(res);
+          this.goodsList = res.data.resultObj.map((item: ItemName) => item.carddata);//[{},{},...]
+        });
+      }
     }
   }
 </script>
