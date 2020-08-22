@@ -10,7 +10,6 @@
     <div v-if="$store.state.user">
       <Head text="三鑫补货系统" left='0' right="0" path="/nav"/>
       <div class="logined">
-        <div>{{$store.state.user.userno}}已登录</div>
         <div class="logout" @click="onLogout">退出登录</div>
       </div>
     </div>

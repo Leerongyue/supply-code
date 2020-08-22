@@ -5,7 +5,6 @@
       <Tab name="补货查询" type="setting"/>
     </router-link>
     <Tab name="修改密码" type="form"/>
-    <Tab name="退出登录" type="delete" @click.native="onLogout"/>
   </Layout>
 </template>
 
@@ -21,10 +20,6 @@
     components: {Layout, DownNav, Tab, Head}
   })
   export default class Nav extends Vue {
-    onLogout() {
-      this.$store.commit('saveUser', {user: null});
-      this.$router.replace('/login');
-    }
   }
 </script>
 
