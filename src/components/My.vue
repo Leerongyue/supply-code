@@ -1,6 +1,6 @@
 <template>
   <Layout class="my">
-    <Head text="个人信息"/>
+    <Head text="三鑫补货系统"/>
     <div class="isLogin">
       <div v-if="$store.state.user">{{$store.state.user.userno}}已登录</div>
       <router-link v-if="!$store.state.user" to="/login">立即登录</router-link>

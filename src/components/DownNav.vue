@@ -1,15 +1,15 @@
 <template>
   <div class="downNav">
-    <router-link to="/login" exact active-class="selected" class="item">
-      <a-icon type="check-circle" class="icon"/>
+    <router-link to="/login" exact active-class="selected" class="list">
+      <a-icon type="check-circle"/>
       <span>登录</span>
     </router-link>
-    <router-link to="/nav" active-class="selected" class="item">
-      <a-icon type="bar-chart" class="icon"/>
+    <router-link to="/nav" active-class="selected" class="list">
+      <a-icon type="plus-circle"/>
       <span>补货</span>
     </router-link>
-    <router-link to="/my" active-class="selected" class="item">
-      <a-icon type="user" class="icon"/>
+    <router-link to="/my" active-class="selected" class="list">
+      <a-icon type="smile"/>
       <span>我的</span>
     </router-link>
   </div>
@@ -32,7 +32,7 @@
     background: #f5f5f5;
     border-top: 0.8px solid #d4d4d4;
 
-    > .item.selected {
+    > .list.selected {
       color: rgb(82, 102, 237);
     }
 
@@ -43,10 +43,6 @@
       padding: 8px 0;
       color: inherit;
       font-size: 32px;
-
-      /*.icon {*/
-      /*  font-size: 24px;*/
-      /*}*/
 
       span {
         font-size: 12px;
