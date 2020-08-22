@@ -7,7 +7,7 @@ import NotFound from '@/components/NotFound.vue';
 import Nav from '@/components/Nav.vue';
 import ChangePassword from '@/components/ChangePassword.vue';
 import Logout from '@/components/Logout.vue';
-import LayOut from '@/components/LayOut.vue';
+import My from '@/components/My.vue';
 
 Vue.use(VueRouter);
 
@@ -41,8 +41,8 @@ const routes: Array<RouteConfig> = [
     component: Logout
   },
   {
-    path: '/layout',
-    component: LayOut
+    path: '/my',
+    component: My
   },
   {
     path: '*',

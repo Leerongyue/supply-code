@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="layout-wrapper">
     <div class="content">
       <slot/>
     </div>
@@ -15,13 +15,13 @@
   @Component({
     components: {DownNav}
   })
-  export default class LayOut extends Vue {
+  export default class Layout extends Vue {
 
   }
 </script>
 
 <style lang="scss" scoped>
-  .wrapper {
+  .layout-wrapper {
     height: 100vh;
     display: flex;
     flex-direction: column;

@@ -4,7 +4,7 @@
       <a-icon type="check-circle" class="icon"/>
       <span>登录</span>
     </router-link>
-    <router-link to="/backstage" active-class="selected" class="item">
+    <router-link to="/nav" active-class="selected" class="item">
       <a-icon type="bar-chart" class="icon"/>
       <span>补货</span>
     </router-link>
@@ -29,10 +29,11 @@
   .downNav {
     display: flex;
     justify-content: space-around;
-    background: rgb(53, 156, 231);
+    background: #f5f5f5;
+    border-top: 0.8px solid #d4d4d4;
 
     > .item.selected {
-      color: #00008B;
+      color: rgb(82, 102, 237);
     }
 
     a {
@@ -40,7 +41,7 @@
       flex-direction: column;
       text-align: center;
       padding: 8px 0;
-      color: #F8F8FF;
+      color: inherit;
       font-size: 32px;
 
       /*.icon {*/

@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <Layout class="item">
     <Head text="商品列表" left="1" path="/nav"/>
     <input type="text" placeholder="请输入商品条码或拼音助记码" v-model="input" @input="onInput">
     <ul class="filter">
@@ -40,16 +40,17 @@
         {{item.barcode}} , {{item.py}}
       </div>
     </div>
-  </div>
+  </Layout>
 </template>
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import Input from '@/components/Input.vue';
   import Head from '@/components/Head.vue';
+  import Layout from '@/components/Layout.vue';
 
   @Component({
-    components: {Head, Input}
+    components: {Layout, Head, Input}
   })
   export default class Item extends Vue {
     data = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',

@@ -1,13 +1,12 @@
 <template>
-  <div class="nav">
+  <Layout class="nav">
     <Head text="三鑫补货系统" left="1" path="/login"/>
     <router-link to="/item">
       <Tab name="补货查询" type="setting"/>
     </router-link>
     <Tab name="修改密码" type="form"/>
     <Tab name="退出登录" type="delete" @click.native="onLogout"/>
-    <DownNav/>
-  </div>
+  </Layout>
 </template>
 
 <script lang="ts">
@@ -16,9 +15,10 @@
   import Head from '@/components/Head.vue';
   import Tab from '@/components/Tab.vue';
   import DownNav from '@/components/DownNav.vue';
+  import Layout from '@/components/Layout.vue';
 
   @Component({
-    components: {DownNav, Tab, Head}
+    components: {Layout, DownNav, Tab, Head}
   })
   export default class Nav extends Vue {
     onLogout() {

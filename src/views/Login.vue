@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <Layout class="wrapper">
     <div class="login" v-if="!$store.state.user">
       <Head text="三鑫补货系统" left='0'/>
       <div class="bind"><strong>员工登录</strong></div>
@@ -8,13 +8,13 @@
       <Button name="立即登录" @click.native="onLogin">立即登录</Button>
     </div>
     <div v-if="$store.state.user">
-      <Head text="三鑫补货系统" left='0' right="1" path="/nav"/>
+      <Head text="三鑫补货系统" left='0' right="0" path="/nav"/>
       <div class="logined">
         <div>{{$store.state.user.userno}}已登录</div>
         <div class="logout" @click="onLogout">退出登录</div>
       </div>
     </div>
-  </div>
+  </Layout>
 </template>
 
 <script lang="ts">
@@ -25,9 +25,10 @@
   import {Md5} from 'md5-typescript';
   import {message} from 'ant-design-vue';
   import Head from '@/components/Head.vue';
+  import Layout from '@/components/Layout.vue';
 
   @Component({
-    components: {Head, Button, Input}
+    components: {Layout, Head, Button, Input}
   })
   export default class Login extends Vue {
     @Inject('reload') private injectedValue!: () => void;
