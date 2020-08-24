@@ -15,7 +15,7 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    redirect: '/login'
+    redirect: '/nav'
   },
   {
     path: '/login',
@@ -56,8 +56,8 @@ const router = new VueRouter({
   routes
 });
 router.beforeEach((to, from, next) => {
+  store.commit('getUser');
   if (to.matched.some(record => record.meta.requireAuth)) {
-    store.commit('getUser');
     if (!store.state.user) {
       message.info('请先绑定个人信息', 0.6);
       next({
@@ -68,8 +68,15 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else {
-    next(); // 确保一定要调用 next()
+    if (!store.state.user) {
+      next();
+    } else {
+      next(false);
+    }
+    // next(); // 确保一定要调用 next()
   }
 });
+const originalPush = VueRouter.prototype.push;
+
 
 export default router;

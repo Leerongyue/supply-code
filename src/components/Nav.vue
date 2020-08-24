@@ -23,7 +23,7 @@
   export default class Nav extends Vue {
     onLogout() {
       this.$store.commit('removeUser');
-      this.$router.replace('/login');
+      this.$router.push('/login');
     }
   }
 </script>
