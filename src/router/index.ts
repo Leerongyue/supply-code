@@ -6,7 +6,6 @@ import Detail from '@/components/Detail.vue';
 import NotFound from '@/components/NotFound.vue';
 import Nav from '@/components/Nav.vue';
 import ChangePassword from '@/components/ChangePassword.vue';
-import Logout from '@/components/Logout.vue';
 import My from '@/components/My.vue';
 import store from '../store/index';
 import {message} from 'ant-design-vue';
@@ -16,7 +15,7 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    redirect: '/login',
+    redirect: '/login'
   },
   {
     path: '/login',
@@ -40,11 +39,6 @@ const routes: Array<RouteConfig> = [
   {
     path: '/changePassword',
     component: ChangePassword,
-    meta: {requireAuth: true}
-  },
-  {
-    path: '/logout',
-    component: Logout,
     meta: {requireAuth: true}
   },
   {

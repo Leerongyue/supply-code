@@ -17,6 +17,9 @@ export default new Vuex.Store({
     getUser(state) {
       state.user = getItem('user');
     },
+    removeUser() {
+      window.localStorage.removeItem('user');
+    },
     saveItem(state, payload) {
       console.log(1);
     },

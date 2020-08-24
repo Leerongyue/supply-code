@@ -22,7 +22,7 @@
   })
   export default class Nav extends Vue {
     onLogout() {
-      this.$store.commit('saveUser', {user: null});
+      this.$store.commit('removeUser');
       this.$router.replace('/login');
     }
   }
