@@ -28,11 +28,12 @@
 <style lang="scss" scoped>
   $lineColor: #f5f5f5;
   .inputItem {
-    margin: 8px 32px;
+    margin: 12px 0;
     padding: 10px 0;
     display: flex;
     background: white;
     border-radius: 24px;
+    width: 90vw;
 
 
     > span {
@@ -41,7 +42,6 @@
     }
 
     > input {
-      flex-grow: 1;
       border: none;
     }
   }

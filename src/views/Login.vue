@@ -1,13 +1,14 @@
 <template>
   <div class="login" v-if="!$store.state.user">
-    <div class="imgWrapper">
-      <img src="../assets/sss-logo.jpg">
+    <div class="xxx">
+      <div class="imgWrapper">
+        <img src="../assets/sss-logo.jpg">
+      </div>
+      <Input type="text" name="账号" placeholder="请输入账号" v-model="userno"/>
+      <Input type="password" name="密码" placeholder="请输入密码" v-model="password"/>
+      <Button name="立即登录" @click.native="onLogin">立即登录</Button>
+      <!--      <div class="warning" v-if="showWarning===true">账号不存在,或密码错误</div>-->
     </div>
-    <!--    <Head text="三鑫补货系统" left='0'/>-->
-    <!--    <div class="bind"><strong>员工登录</strong></div>-->
-    <Input type="text" name="账号" placeholder="请输入账号" v-model="userno"/>
-    <Input type="password" name="密码" placeholder="请输入密码" v-model="password"/>
-    <Button name="立即登录" @click.native="onLogin">立即登录</Button>
     <div class="copyright">Copyright © 2020 Sanxin.All Rights Reserved</div>
   </div>
 </template>
@@ -29,6 +30,7 @@
     @Inject('reload') private injectedValue!: () => void;
     password = '';
     userno = '';
+    showWarning = false;
 
     created() {
       this.$store.commit('getUser');

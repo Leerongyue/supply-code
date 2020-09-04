@@ -16,14 +16,12 @@
 
 <style lang="scss" scoped>
   .btn {
-    margin: 0 16px;
-
     > button {
       background: rgb(0, 192, 239);
       width: 100%;
       margin-top: 24px;
       padding: 10px 0;
-      /*border-radius: 50px;*/
+      border-radius: 24px;
       color: white
     }
   }
