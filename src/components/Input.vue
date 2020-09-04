@@ -31,8 +31,8 @@
     margin: 8px 32px;
     padding: 10px 0;
     display: flex;
-    background: #f5f5f5;
-    border-radius: 4px;
+    background: white;
+    border-radius: 24px;
 
 
     > span {

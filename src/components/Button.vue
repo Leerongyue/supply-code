@@ -23,7 +23,7 @@
       width: 100%;
       margin-top: 24px;
       padding: 10px 0;
-      border-radius: 24px;
+      /*border-radius: 50px;*/
       color: white
     }
   }

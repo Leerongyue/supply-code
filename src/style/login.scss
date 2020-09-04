@@ -1,6 +1,6 @@
 .login {
   height: 100vh;
-  background: white;
+  background: rgb(241, 241, 241);
   position: relative;
 
   .bind {
@@ -11,10 +11,29 @@
   }
 
   ::v-deep button {
-    border-radius: 4px;
+    border-radius: 24px;
   }
 
   ::v-deep .btn {
     margin: 0 32px;
   }
+
+  .imgWrapper {
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 40vw;
+      height: 38vw;
+      background: white;
+      text-align: center;
+      margin: 64px 0 32px 0;
+    }
+  }
+
+  .copyright {
+    text-align: center;
+    margin-top: 250px;
+  }
+
 }

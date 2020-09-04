@@ -1,10 +1,14 @@
 <template>
   <div class="login" v-if="!$store.state.user">
-    <Head text="三鑫补货系统" left='0'/>
-    <div class="bind"><strong>员工登录</strong></div>
-    <Input type="text" name="工号" placeholder="请输入工号" v-model="userno"/>
+    <div class="imgWrapper">
+      <img src="../assets/sss-logo.jpg">
+    </div>
+    <!--    <Head text="三鑫补货系统" left='0'/>-->
+    <!--    <div class="bind"><strong>员工登录</strong></div>-->
+    <Input type="text" name="账号" placeholder="请输入工号" v-model="userno"/>
     <Input type="password" name="密码" placeholder="请输入密码" v-model="password"/>
     <Button name="立即登录" @click.native="onLogin">立即登录</Button>
+    <div class="copyright">Copyright © 2020 Sanxin.All Rights Reserved</div>
   </div>
 </template>
 
