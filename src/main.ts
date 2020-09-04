@@ -5,9 +5,11 @@ import router from './router';
 import store from './store';
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
+import Icon from '@/components/Icon.vue';
 
 Vue.use(Antd);
 Vue.config.productionTip = false;
+Vue.component('Icon', Icon);
 
 new Vue({
   router,

@@ -3,7 +3,7 @@
     <span>{{name}}</span>
     <input
       :placeholder="placeholder"
-      :type="type"
+      type="text"
       :value="value"
       @input="$emit('input',$event.target.value)"
     >
@@ -19,7 +19,6 @@
     @Prop(String) name!: string;
     @Prop(String) placeholder!: string;
     @Prop(String) value!: string;
-    @Prop(String) type!: string;
   }
 </script>
 <style lang="scss" scoped>
@@ -28,12 +27,12 @@
 <style lang="scss" scoped>
   $lineColor: #f5f5f5;
   .inputItem {
-    margin: 12px 0;
+    width: 85vw;
+    margin: 8px 0px;
     padding: 10px 0;
     display: flex;
     background: white;
     border-radius: 24px;
-    width: 90vw;
 
 
     > span {
@@ -42,7 +41,10 @@
     }
 
     > input {
+      flex-grow: 1;
       border: none;
     }
+
+
   }
 </style>

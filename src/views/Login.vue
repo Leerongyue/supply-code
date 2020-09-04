@@ -1,15 +1,12 @@
 <template>
-  <div class="login" v-if="!$store.state.user">
-    <div class="xxx">
-      <div class="imgWrapper">
-        <img src="../assets/sss-logo.jpg">
-      </div>
-      <Input type="text" name="账号" placeholder="请输入账号" v-model="userno"/>
-      <Input type="password" name="密码" placeholder="请输入密码" v-model="password"/>
-      <Button name="立即登录" @click.native="onLogin">立即登录</Button>
-      <!--      <div class="warning" v-if="showWarning===true">账号不存在,或密码错误</div>-->
+  <div class="login">
+    <div class="wrapper">
+      <Icon name="logo"/>
+      <Input name="工号" placeholder="请输入工号" v-model="userno"/>
+      <Input name="密码" placeholder="请输入密码" v-model="password"/>
+      <Button name="立即绑定" @click.native="onLogin" @keyup.enter.native="onLogin">立即绑定</Button>
     </div>
-    <div class="copyright">Copyright © 2020 Sanxin.All Rights Reserved</div>
+    <div class="copyright">{{copyrightDate}}</div>
   </div>
 </template>
 
@@ -22,6 +19,7 @@
   import {message} from 'ant-design-vue';
   import Head from '@/components/Head.vue';
   import Layout from '@/components/Layout.vue';
+  import dayjs from 'dayjs';
 
   @Component({
     components: {Layout, Head, Button, Input}
@@ -30,13 +28,16 @@
     @Inject('reload') private injectedValue!: () => void;
     password = '';
     userno = '';
-    showWarning = false;
 
     created() {
       this.$store.commit('getUser');
       const user = this.$store.state.user;
       this.userno = user ? user.userno : '';
       // this.password = user ? user.password : '';
+    }
+
+    get copyrightDate() {
+      return `Copyright © ${dayjs().year()} Sanxin.All Rights Reserved`;
     }
 
     onLogin() {
